@@ -4,10 +4,10 @@ import { Calendar, MapPin, Briefcase } from 'lucide-react';
 const Experience: React.FC = () => {
   const experiences = [
     {
-      title: "Senior Mobile Architect",
-      company: "Tech Innovation Corp",
-      location: "San Francisco, CA",
-      period: "2022 - Present",
+      title: "Mobile Architect",
+      company: "Brilworks Inc",
+      location: "Ahmedabad, Gujarat",
+      period: "2021 - Present",
       description: "Leading mobile architecture decisions for cross-platform applications serving 2M+ users. Implementing scalable solutions using React Native and Flutter.",
       achievements: [
         "Reduced app load time by 40% through architecture optimization",
@@ -17,9 +17,9 @@ const Experience: React.FC = () => {
     },
     {
       title: "Lead Mobile Developer",
-      company: "Digital Solutions Inc",
-      location: "Seattle, WA",
-      period: "2019 - 2022",
+      company: "EFT Corporation (previsouly uKheshe)",
+      location: "London, UK",
+      period: "2017 - 2021",
       description: "Spearheaded mobile development initiatives and mentored junior developers. Built high-performance iOS and Android applications.",
       achievements: [
         "Delivered 15+ mobile applications with 4.8+ App Store ratings",
@@ -29,26 +29,40 @@ const Experience: React.FC = () => {
     },
     {
       title: "Mobile Developer",
-      company: "StartupTech",
-      location: "Austin, TX",
-      period: "2016 - 2019",
-      description: "Developed React Native and native iOS applications. Collaborated with backend teams to implement robust APIs.",
+      company: "Mindstakes Games Pvt. Ltd.",
+      location: "Ahmedabad, Gujarat",
+      period: "2014 - 2017",
+      description: "Developed a poker game app for android and ios which was published on google play and app store. This app was one of the top 1000 apps in the world in the poker category. I was the lead developer for this app.",
       achievements: [
         "Built MVP mobile app that gained 100k+ users in first year",
-        "Implemented offline-first architecture",
-        "Integrated Firebase and third-party services"
+        "Implemented websocket for real-time communication",
+        "Implemented analytics and crash reporting"
+      ]
+    },
+    {
+      title: "iOS Developer",
+      company: "Creativeglance Technologies",
+      location: "Ahmedabad, Gujarat",
+      period: "2014 - 2015",
+      description: "Developed iOS apps for a client. Worked on few cross platform games for android and ios.",
+      achievements: [
+        "Developed 2+ iOS apps from concept to App Store",
+        "Developed a game called 'Flappy Leaders' which was published on app store, which was going viral on app store at that time",
+        "Mastered iOS development fundamentals",
+        "Ocationally communicated with the client to understand the requirements and deliver the best possible solution"
       ]
     },
     {
       title: "Junior iOS Developer",
-      company: "Mobile Agency",
-      location: "Denver, CO",
-      period: "2014 - 2016",
-      description: "Started career developing native iOS applications. Gained expertise in Swift and mobile UI/UX design.",
+      company: "Aadhaar InfoTech Ltd.",
+      location: "Ahmedabad, Gujarat",
+      period: "2013 - 2014",
+      description: "Started career developing native iOS applications. Gained expertise in Objective-C and mobile UI/UX design.",
       achievements: [
-        "Developed 8+ iOS apps from concept to App Store",
-        "Mastered iOS development fundamentals",
-        "Collaborated with design teams on user experience"
+        "Learned Software Development Fundamentals and started developing native iOS applications.",
+        "Mastered Objective-C development fundamentals",
+        "Collaborated with design teams on user experience",
+        "Developed few mobile apps and published on app store"
       ]
     }
   ];

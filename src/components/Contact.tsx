@@ -34,7 +34,7 @@ const Contact: React.FC = () => {
                 </div>
                 <div>
                   <p className="font-medium text-gray-900">Email</p>
-                  <p className="text-gray-600">dinesh.kachhot@example.com</p>
+                  <p className="text-gray-600">dinesh.kachhot@gmail.com</p>
                 </div>
               </div>
 
@@ -44,7 +44,7 @@ const Contact: React.FC = () => {
                 </div>
                 <div>
                   <p className="font-medium text-gray-900">Phone</p>
-                  <p className="text-gray-600">+91 98765 43210</p>
+                  <p className="text-gray-600">+91 96016 19012</p>
                 </div>
               </div>
 
@@ -63,14 +63,17 @@ const Contact: React.FC = () => {
             <div className="pt-8">
               <h4 className="font-bold text-gray-900 mb-4">Follow Me</h4>
               <div className="flex space-x-4">
-                <a href="#" className="w-12 h-12 bg-gray-100 rounded-full flex items-center justify-center hover:bg-gray-900 hover:text-white transition-all duration-200">
+                <a onClick={() => window.open('https://github.com/dineshkachhot', '_blank')} className="w-12 h-12 bg-gray-100 rounded-full flex items-center justify-center hover:bg-gray-900 hover:text-white transition-all duration-200">
                   <Github className="w-6 h-6" />
                 </a>
-                <a href="#" className="w-12 h-12 bg-gray-100 rounded-full flex items-center justify-center hover:bg-blue-600 hover:text-white transition-all duration-200">
+                <a onClick={() => window.open('https://www.linkedin.com/in/dineshkachhot/', '_blank')} className="w-12 h-12 bg-gray-100 rounded-full flex items-center justify-center hover:bg-blue-600 hover:text-white transition-all duration-200">
                   <Linkedin className="w-6 h-6" />
                 </a>
-                <a href="#" className="w-12 h-12 bg-gray-100 rounded-full flex items-center justify-center hover:bg-blue-400 hover:text-white transition-all duration-200">
+                <a onClick={() => window.open('https://x.com/dineshkachhot', '_blank')} className="w-12 h-12 bg-gray-100 rounded-full flex items-center justify-center hover:bg-blue-400 hover:text-white transition-all duration-200">
                   <Twitter className="w-6 h-6" />
+                </a>
+                <a onClick={() => window.open('https://www.medium.com/@dinesh.kachhot', '_blank')} className="w-12 h-12 bg-gray-100 rounded-full flex items-center justify-center hover:bg-gray-900 hover:text-white transition-all duration-200">
+                  <span className="text-gray-700 font-bold text-lg">M</span>
                 </a>
               </div>
             </div>

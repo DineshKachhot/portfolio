@@ -1,5 +1,5 @@
 import React from 'react';
-import { ChevronDown, Download, Github, Linkedin, Mail } from 'lucide-react';
+import { ChevronDown, Download, Github, Instagram, Linkedin, Mail, Twitter } from 'lucide-react';
 
 const Hero: React.FC = () => {
   const scrollToAbout = () => {
@@ -32,19 +32,25 @@ const Hero: React.FC = () => {
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
-            <button className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-8 py-4 rounded-full font-semibold hover:shadow-lg transform hover:scale-105 transition-all duration-200 flex items-center space-x-2">
+            <button onClick={() => window.open('https://drive.google.com/file/d/1LL28ce5PJKepQ9rXKREbczaQWdlllAmV/view?usp=sharing', '_blank')} className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-8 py-4 rounded-full font-semibold hover:shadow-lg transform hover:scale-105 transition-all duration-200 flex items-center space-x-2">
               <Download size={20} />
               <span>Download CV</span>
             </button>
             
             <div className="flex space-x-4">
-              <a href="#" className="w-12 h-12 bg-white rounded-full shadow-md flex items-center justify-center hover:shadow-lg hover:scale-110 transition-all duration-200">
+              <a href="#" onClick={() => window.open('https://github.com/dineshkachhot', '_blank')} className="w-12 h-12 bg-white rounded-full shadow-md flex items-center justify-center hover:shadow-lg hover:scale-110 transition-all duration-200">
                 <Github size={24} className="text-gray-700" />
               </a>
-              <a href="#" className="w-12 h-12 bg-white rounded-full shadow-md flex items-center justify-center hover:shadow-lg hover:scale-110 transition-all duration-200">
+              <a href="#" onClick={() => window.open('https://www.linkedin.com/in/dineshkachhot/', '_blank')} className="w-12 h-12 bg-white rounded-full shadow-md flex items-center justify-center hover:shadow-lg hover:scale-110 transition-all duration-200">
                 <Linkedin size={24} className="text-blue-600" />
               </a>
-              <a href="#" className="w-12 h-12 bg-white rounded-full shadow-md flex items-center justify-center hover:shadow-lg hover:scale-110 transition-all duration-200">
+              <a href="#" onClick={() => window.open('https://x.com/dineshkachhot', '_blank')} className="w-12 h-12 bg-white rounded-full shadow-md flex items-center justify-center hover:shadow-lg hover:scale-110 transition-all duration-200">
+                <Twitter size={24} className="text-blue-600" />
+              </a>
+              <a href="#" onClick={() => window.open('https://www.medium.com/@dinesh.kachhot', '_blank')} className="w-12 h-12 bg-white rounded-full shadow-md flex items-center justify-center hover:shadow-lg hover:scale-110 transition-all duration-200">
+                <span className="text-gray-700 font-bold text-lg">M</span>
+              </a>
+              <a href="#" onClick={() => window.open('mailto:dinesh.kachhot@gmail.com', '_blank')} className="w-12 h-12 bg-white rounded-full shadow-md flex items-center justify-center hover:shadow-lg hover:scale-110 transition-all duration-200">
                 <Mail size={24} className="text-red-500" />
               </a>
             </div>
