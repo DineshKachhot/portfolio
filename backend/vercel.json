@@ -15,10 +15,5 @@
   "env": {
     "EMAIL_USER": "@email_user",
     "EMAIL_PASS": "@email_pass"
-  },
-  "functions": {
-    "server.js": {
-      "maxDuration": 10
-    }
   }
 }
