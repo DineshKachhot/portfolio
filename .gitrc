@@ -1,0 +1,20 @@
+#!/bin/bash
+# Git Configuration Script for this directory
+# Run this script to apply Git configuration only to this project
+
+echo "Applying Git configuration for this directory..."
+
+# Set user name and email for this repository only
+git config user.name "Dinesh Kachhot"
+git config user.email "dinesh.kachhot@gmail.com"
+
+# Set additional configurations
+git config core.editor "code --wait"
+git config core.autocrlf input
+git config init.defaultBranch main
+git config pull.rebase false
+git config push.default simple
+
+echo "Git configuration applied successfully!"
+echo "Name: $(git config user.name)"
+echo "Email: $(git config user.email)"

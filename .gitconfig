@@ -1,0 +1,16 @@
+[user]
+	name = Dinesh Kachhot
+	email = dinesh.kachhot@gmail.com
+
+[core]
+    editor = code --wait
+    autocrlf = input
+
+[init]
+    defaultBranch = main
+
+[pull]
+    rebase = false
+
+[push]
+    default = simple
