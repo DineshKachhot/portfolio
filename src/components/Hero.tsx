@@ -37,6 +37,13 @@ const Hero: React.FC = () => {
               <span>Download CV</span>
             </button>
             
+            <button 
+              onClick={() => document.getElementById('blogs')?.scrollIntoView({ behavior: 'smooth' })}
+              className="bg-white text-gray-700 border-2 border-gray-300 px-8 py-4 rounded-full font-semibold hover:shadow-lg hover:border-blue-600 hover:text-blue-600 transform hover:scale-105 transition-all duration-200"
+            >
+              Read My Blogs
+            </button>
+            
             <div className="flex space-x-4">
               <a href="#" onClick={() => window.open('https://github.com/dineshkachhot', '_blank')} className="w-12 h-12 bg-white rounded-full shadow-md flex items-center justify-center hover:shadow-lg hover:scale-110 transition-all duration-200">
                 <Github size={24} className="text-gray-700" />
