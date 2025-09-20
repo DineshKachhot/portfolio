@@ -52,6 +52,61 @@ const Blogs: React.FC = () => {
   };
 
   const handleShare = (blog: Blog) => {
+    const shareData = {
+      title: blog.title,
+      text: blog.excerpt,
+      url: `${window.location.origin}/blog/${blog.id}`
+    };
+
+    if (navigator.share && navigator.canShare && navigator.canShare(shareData)) {
+      navigator.share(shareData).catch((error) => {
+        // If sharing fails (permission denied, user cancellation, etc.), fall back to clipboard
+        console.log('Share failed, falling back to clipboard:', error);
+        fallbackToClipboard(blog);
+      });
+    } else {
+      // Fallback for browsers that don't support Web Share API or can't share the data
+      fallbackToClipboard(blog);
+    }
+  };
+
+  const fallbackToClipboard = (blog: Blog) => {
+    const blogUrl = `${window.location.origin}/blog/${blog.id}`;
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(blogUrl).then(() => {
+        alert('Blog link copied to clipboard!');
+      }).catch(() => {
+        // Final fallback for older browsers
+        fallbackCopyToClipboard(blogUrl);
+      });
+    } else {
+      // Final fallback for older browsers
+      fallbackCopyToClipboard(blogUrl);
+    }
+  };
+
+  const fallbackCopyToClipboard = (text: string) => {
+    const textArea = document.createElement('textarea');
+    textArea.value = text;
+    textArea.style.position = 'fixed';
+    textArea.style.left = '-999999px';
+    textArea.style.top = '-999999px';
+    document.body.appendChild(textArea);
+    textArea.focus();
+    textArea.select();
+    try {
+      document.execCommand('copy');
+      alert('Blog link copied to clipboard!');
+    } catch (err) {
+      console.error('Failed to copy to clipboard:', err);
+      // Show the URL to the user as a last resort
+      prompt('Copy this link:', text);
+    } finally {
+      document.body.removeChild(textArea);
+    }
+  };
+
+  const handleShare_old = (blog: Blog) => {
     if (navigator.share) {
       navigator.share({
         title: blog.title,
