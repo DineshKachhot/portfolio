@@ -7,6 +7,7 @@ import Experience from './components/Experience';
 import Projects from './components/Projects';
 import Blogs from './components/Blogs';
 import BlogDetail from './components/BlogDetail';
+import BlogAdmin from './components/BlogAdmin';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
 
