@@ -1,9 +1,13 @@
 import React, { useState } from 'react';
-import { Plus, Edit, Trash2, Eye, EyeOff, Save, X, Image } from 'lucide-react';
+import { Plus, Edit, Trash2, Eye, EyeOff, Save, X, Image, ArrowLeft } from 'lucide-react';
 import { Blog, BlogFormData } from '../types/blog';
 import { mockBlogs } from '../data/blogs';
 
-const BlogAdmin: React.FC = () => {
+interface BlogAdminProps {
+  onBack: () => void;
+}
+
+const BlogAdmin: React.FC<BlogAdminProps> = ({ onBack }) => {
   const [blogs, setBlogs] = useState<Blog[]>(mockBlogs);
   const [isEditing, setIsEditing] = useState(false);
   const [editingBlog, setEditingBlog] = useState<Blog | null>(null);
@@ -106,7 +110,16 @@ const BlogAdmin: React.FC = () => {
     <div className="min-h-screen bg-gray-50 py-8">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center mb-8">
-          <h1 className="text-3xl font-bold text-gray-900">Blog Administration</h1>
+          <div className="flex items-center space-x-4">
+            <button
+              onClick={onBack}
+              className="flex items-center space-x-2 text-gray-600 hover:text-gray-900 transition-colors duration-200"
+            >
+              <ArrowLeft className="w-5 h-5" />
+              <span>Back to Portfolio</span>
+            </button>
+            <h1 className="text-3xl font-bold text-gray-900">Blog Administration</h1>
+          </div>
           <button
             onClick={() => setIsEditing(true)}
             className="flex items-center space-x-2 bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-3 rounded-lg hover:shadow-lg transition-all duration-200"

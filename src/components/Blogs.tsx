@@ -5,9 +5,10 @@ import { Blog } from '../types/blog';
 
 interface BlogsProps {
   onBlogSelect: (blogId: string) => void;
+  onBlogAdmin: () => void;
 }
 
-const Blogs: React.FC<BlogsProps> = ({ onBlogSelect }) => {
+const Blogs: React.FC<BlogsProps> = ({ onBlogSelect, onBlogAdmin }) => {
   const [blogs] = useState<Blog[]>(getAllBlogs());
   const [filteredBlogs, setFilteredBlogs] = useState<Blog[]>(blogs);
   const [searchTerm, setSearchTerm] = useState('');
@@ -136,6 +137,17 @@ const Blogs: React.FC<BlogsProps> = ({ onBlogSelect }) => {
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
             Insights, tutorials, and thoughts on mobile development, architecture, and technology trends
           </p>
+          
+          {/* Admin Access Button */}
+          <div className="mt-8">
+            <button
+              onClick={onBlogAdmin}
+              className="bg-gradient-to-r from-purple-600 to-pink-600 text-white px-6 py-3 rounded-lg font-semibold hover:shadow-lg transform hover:scale-105 transition-all duration-200 flex items-center space-x-2 mx-auto"
+            >
+              <span>✏️</span>
+              <span>Manage Blogs</span>
+            </button>
+          </div>
         </div>
 
         {/* Search and Filter Section */}

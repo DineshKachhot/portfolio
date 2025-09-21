@@ -12,7 +12,7 @@ import Footer from './components/Footer';
 
 function App() {
   const [activeSection, setActiveSection] = useState('home');
-  const [currentView, setCurrentView] = useState<'portfolio' | 'blog-detail'>('portfolio');
+  const [currentView, setCurrentView] = useState<'portfolio' | 'blog-detail' | 'blog-admin'>('portfolio');
   const [selectedBlogId, setSelectedBlogId] = useState<string>('');
 
   useEffect(() => {
@@ -53,6 +53,10 @@ function App() {
     }, 100);
   };
 
+  const handleBlogAdmin = () => {
+    setCurrentView('blog-admin');
+    window.scrollTo(0, 0);
+  };
   if (currentView === 'blog-detail') {
     return (
       <div className="bg-gray-50">
@@ -60,6 +64,15 @@ function App() {
       </div>
     );
   }
+
+  if (currentView === 'blog-admin') {
+    return (
+      <div className="bg-gray-50">
+        <BlogAdmin onBack={handleBackToPortfolio} />
+      </div>
+    );
+  }
+
   return (
     <div className="bg-gray-50">
       <Header activeSection={activeSection} />
@@ -69,7 +82,7 @@ function App() {
         <Skills />
         <Experience />
         <Projects />
-        <Blogs onBlogSelect={handleBlogSelect} />
+        <Blogs onBlogSelect={handleBlogSelect} onBlogAdmin={handleBlogAdmin} />
         <Contact />
       </main>
       <Footer />
