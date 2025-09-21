@@ -3,7 +3,11 @@ import { Calendar, Clock, Heart, Share2, Tag, Search, Filter } from 'lucide-reac
 import { getAllBlogs, getBlogsByTag } from '../data/blogs';
 import { Blog } from '../types/blog';
 
-const Blogs: React.FC = () => {
+interface BlogsProps {
+  onBlogSelect: (blogId: string) => void;
+}
+
+const Blogs: React.FC<BlogsProps> = ({ onBlogSelect }) => {
   const [blogs] = useState<Blog[]>(getAllBlogs());
   const [filteredBlogs, setFilteredBlogs] = useState<Blog[]>(blogs);
   const [searchTerm, setSearchTerm] = useState('');
@@ -120,12 +124,6 @@ const Blogs: React.FC = () => {
     }
   };
 
-  const navigateToBlog = (blogId: string) => {
-    // In a real app with routing, this would navigate to the blog detail page
-    console.log(`Navigate to blog ${blogId}`);
-    // For now, we'll scroll to the blog section
-    document.getElementById('blog-detail')?.scrollIntoView({ behavior: 'smooth' });
-  };
 
   return (
     <section id="blogs" className="py-20 bg-white">
@@ -188,7 +186,7 @@ const Blogs: React.FC = () => {
             <article
               key={blog.id}
               className="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 hover:transform hover:scale-105 cursor-pointer"
-              onClick={() => navigateToBlog(blog.id)}
+              onClick={() => onBlogSelect(blog.id)}
             >
               <div className="relative overflow-hidden">
                 <img
