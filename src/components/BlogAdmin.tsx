@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 import { Plus, Edit, Trash2, Eye, EyeOff, Save, X, Image, ArrowLeft } from 'lucide-react';
 import { Blog, BlogFormData } from '../types/blog';
-import { mockBlogs } from '../data/blogs';
+import { markdownBlogs } from '../data/blogs';
 
 interface BlogAdminProps {
   onBack: () => void;
 }
 
 const BlogAdmin: React.FC<BlogAdminProps> = ({ onBack }) => {
-  const [blogs, setBlogs] = useState<Blog[]>(mockBlogs);
+  const [blogs, setBlogs] = useState<Blog[]>(markdownBlogs);
   const [isEditing, setIsEditing] = useState(false);
   const [editingBlog, setEditingBlog] = useState<Blog | null>(null);
   const [formData, setFormData] = useState<BlogFormData>({
@@ -265,6 +265,15 @@ const BlogAdmin: React.FC<BlogAdminProps> = ({ onBack }) => {
         <div className="bg-white rounded-xl shadow-sm overflow-hidden">
           <div className="overflow-x-auto">
             <table className="w-full">
+              <div className="p-6 bg-blue-50 border-b border-blue-200">
+                <div className="flex items-center space-x-2 text-blue-800">
+                  <span className="text-sm font-medium">📝 Note:</span>
+                  <span className="text-sm">
+                    Blogs are now loaded from markdown files in the <code className="bg-blue-100 px-2 py-1 rounded text-xs">src/blogs/</code> folder. 
+                    To add or edit blogs, create or modify <code className="bg-blue-100 px-2 py-1 rounded text-xs">.md</code> files in that directory.
+                  </span>
+                </div>
+              </div>
               <thead className="bg-gray-50 border-b border-gray-200">
                 <tr>
                   <th className="px-6 py-4 text-left text-sm font-medium text-gray-500 uppercase tracking-wider">
@@ -351,22 +360,25 @@ const BlogAdmin: React.FC<BlogAdminProps> = ({ onBack }) => {
                             blog.isPublished
                               ? 'text-yellow-600 hover:bg-yellow-100'
                               : 'text-green-600 hover:bg-green-100'
-                          }`}
+                          } opacity-50 cursor-not-allowed`}
                           title={blog.isPublished ? 'Unpublish' : 'Publish'}
+                          disabled
                         >
                           {blog.isPublished ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
                         </button>
                         <button
                           onClick={() => handleEdit(blog)}
-                          className="p-2 text-blue-600 hover:bg-blue-100 rounded-lg transition-colors duration-200"
+                          className="p-2 text-blue-600 hover:bg-blue-100 rounded-lg transition-colors duration-200 opacity-50 cursor-not-allowed"
                           title="Edit"
+                          disabled
                         >
                           <Edit className="w-4 h-4" />
                         </button>
                         <button
                           onClick={() => handleDelete(blog.id)}
-                          className="p-2 text-red-600 hover:bg-red-100 rounded-lg transition-colors duration-200"
+                          className="p-2 text-red-600 hover:bg-red-100 rounded-lg transition-colors duration-200 opacity-50 cursor-not-allowed"
                           title="Delete"
+                          disabled
                         >
                           <Trash2 className="w-4 h-4" />
                         </button>

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Calendar, Clock, Heart, Share2, Tag, Search, Filter } from 'lucide-react';
+import { Calendar, Clock, Share2, Tag, Search, Filter } from 'lucide-react';
 import { getAllBlogs, getBlogsByTag } from '../data/blogs';
 import { Blog } from '../types/blog';
 
@@ -51,10 +51,6 @@ const Blogs: React.FC<BlogsProps> = ({ onBlogSelect, onBlogAdmin }) => {
     setFilteredBlogs(blogs);
   };
 
-  const handleLike = (blogId: string) => {
-    // In a real app, this would make an API call
-    console.log(`Liked blog ${blogId}`);
-  };
 
   const handleShare = (blog: Blog) => {
     const shareData = {
@@ -249,16 +245,6 @@ const Blogs: React.FC<BlogsProps> = ({ onBlogSelect, onBlogAdmin }) => {
 
                 {/* Actions */}
                 <div className="flex items-center justify-between pt-4 border-t border-gray-100">
-                  <button
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      handleLike(blog.id);
-                    }}
-                    className="flex items-center space-x-1 text-gray-500 hover:text-red-500 transition-colors duration-200"
-                  >
-                    <Heart className="w-4 h-4" />
-                    <span className="text-sm">{blog.likes}</span>
-                  </button>
 
                   <button
                     onClick={(e) => {
@@ -270,6 +256,10 @@ const Blogs: React.FC<BlogsProps> = ({ onBlogSelect, onBlogAdmin }) => {
                     <Share2 className="w-4 h-4" />
                     <span className="text-sm">{blog.shares}</span>
                   </button>
+
+                  <div className="flex items-center space-x-1 text-gray-500">
+                    <span className="text-sm">{new Date(blog.publishedAt).toLocaleDateString()}</span>
+                  </div>
 
                   <div className="flex items-center space-x-1 text-gray-500">
                     <Clock className="w-4 h-4" />

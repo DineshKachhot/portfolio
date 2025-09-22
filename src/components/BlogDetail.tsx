@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ArrowLeft, Calendar, Clock, Heart, Share2, Tag, User, MessageCircle } from 'lucide-react';
+import { ArrowLeft, Calendar, Clock, Share2, Tag, User, MessageCircle } from 'lucide-react';
 import { Blog } from '../types/blog';
 import { getBlogById } from '../data/blogs';
 
@@ -10,8 +10,6 @@ interface BlogDetailProps {
 
 const BlogDetail: React.FC<BlogDetailProps> = ({ blogId, onBack }) => {
   const blog = getBlogById(blogId);
-  const [isLiked, setIsLiked] = useState(false);
-  const [likes, setLikes] = useState(blog?.likes || 0);
 
   if (!blog) {
     return (
@@ -29,10 +27,6 @@ const BlogDetail: React.FC<BlogDetailProps> = ({ blogId, onBack }) => {
     );
   }
 
-  const handleLike = () => {
-    setIsLiked(!isLiked);
-    setLikes(prev => isLiked ? prev - 1 : prev + 1);
-  };
 
   const handleShare = () => {
     if (navigator.share) {
@@ -47,16 +41,33 @@ const BlogDetail: React.FC<BlogDetailProps> = ({ blogId, onBack }) => {
     }
   };
 
-  const formatContent = (content: string) => {
-    // Simple markdown-like formatting
+  const formatMarkdownContent = (content: string): string => {
     return content
+      // Headers
       .replace(/^# (.*$)/gim, '<h1 class="text-3xl font-bold text-gray-900 mb-6 mt-8">$1</h1>')
       .replace(/^## (.*$)/gim, '<h2 class="text-2xl font-bold text-gray-900 mb-4 mt-6">$1</h2>')
       .replace(/^### (.*$)/gim, '<h3 class="text-xl font-bold text-gray-900 mb-3 mt-4">$1</h3>')
+      
+      // Bold and italic
       .replace(/\*\*(.*?)\*\*/g, '<strong class="font-semibold">$1</strong>')
       .replace(/\*(.*?)\*/g, '<em class="italic">$1</em>')
-      .replace(/```([\s\S]*?)```/g, '<pre class="bg-gray-100 p-4 rounded-lg overflow-x-auto my-4"><code class="text-sm">$1</code></pre>')
-      .replace(/`(.*?)`/g, '<code class="bg-gray-100 px-2 py-1 rounded text-sm font-mono">$1</code>')
+      
+      // Code blocks with language support
+      .replace(/```(\w+)?\n([\s\S]*?)```/g, '<pre class="bg-gray-100 p-4 rounded-lg overflow-x-auto my-4 border"><code class="text-sm language-$1">$2</code></pre>')
+      .replace(/```([\s\S]*?)```/g, '<pre class="bg-gray-100 p-4 rounded-lg overflow-x-auto my-4 border"><code class="text-sm">$1</code></pre>')
+      
+      // Inline code
+      .replace(/`(.*?)`/g, '<code class="bg-gray-100 px-2 py-1 rounded text-sm font-mono text-gray-800">$1</code>')
+      
+      // Lists
+      .replace(/^\- (.*$)/gim, '<li class="ml-4 mb-1">• $1</li>')
+      .replace(/^\* (.*$)/gim, '<li class="ml-4 mb-1">• $1</li>')
+      .replace(/^(\d+)\. (.*$)/gim, '<li class="ml-4 mb-1">$1. $2</li>')
+      
+      // Links
+      .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" class="text-blue-600 hover:text-blue-800 underline" target="_blank" rel="noopener noreferrer">$1</a>')
+      
+      // Paragraphs
       .replace(/\n\n/g, '</p><p class="text-gray-700 leading-relaxed mb-4">')
       .replace(/\n/g, '<br>');
   };
@@ -132,17 +143,6 @@ const BlogDetail: React.FC<BlogDetailProps> = ({ blogId, onBack }) => {
             </div>
 
             <div className="flex items-center space-x-4">
-              <button
-                onClick={handleLike}
-                className={`flex items-center space-x-2 px-4 py-2 rounded-lg transition-all duration-200 ${
-                  isLiked
-                    ? 'bg-red-100 text-red-600 hover:bg-red-200'
-                    : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
-                }`}
-              >
-                <Heart className={`w-5 h-5 ${isLiked ? 'fill-current' : ''}`} />
-                <span>{likes}</span>
-              </button>
 
               <button
                 onClick={handleShare}
@@ -160,7 +160,7 @@ const BlogDetail: React.FC<BlogDetailProps> = ({ blogId, onBack }) => {
           <div 
             className="prose prose-lg max-w-none"
             dangerouslySetInnerHTML={{ 
-              __html: `<p class="text-gray-700 leading-relaxed mb-4">${formatContent(blog.content)}</p>` 
+              __html: `<p class="text-gray-700 leading-relaxed mb-4">${formatMarkdownContent(blog.content)}</p>` 
             }}
           />
         </div>
