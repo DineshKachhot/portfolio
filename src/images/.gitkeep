@@ -1,0 +1,10 @@
+# Images folder for blog assets
+
+This folder contains images used in blog posts. Add your blog images here and reference them in your markdown files.
+
+Example structure:
+- react-native-architecture.jpg
+- flutter-vs-react-native.jpg
+- swiftui-development.jpg
+- mobile-performance.jpg
+- etc.
