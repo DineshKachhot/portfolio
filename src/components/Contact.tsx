@@ -8,7 +8,6 @@ const Contact: React.FC = () => {
     subject: '',
     message: ''
   });
-  const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
   const [statusMessage, setStatusMessage] = useState('');
 
@@ -20,36 +19,53 @@ const Contact: React.FC = () => {
     }));
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    setIsSubmitting(true);
-    setSubmitStatus('idle');
-
-    try {
-      const response = await fetch('/api/send-email', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
-      });
-
-      const result = await response.json();
-
-      if (result.success) {
-        setSubmitStatus('success');
-        setStatusMessage('Message sent successfully! I\'ll get back to you soon.');
-        setFormData({ name: '', email: '', subject: '', message: '' });
-      } else {
-        setSubmitStatus('error');
-        setStatusMessage(result.message || 'Failed to send message. Please try again.');
-      }
-    } catch (error) {
+    
+    // Validate required fields
+    if (!formData.name || !formData.email || !formData.subject || !formData.message) {
       setSubmitStatus('error');
-      setStatusMessage('Failed to send message. Please check your connection and try again.');
-    } finally {
-      setIsSubmitting(false);
+      setStatusMessage('Please fill in all required fields.');
+      return;
     }
+
+    // Validate email format
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(formData.email)) {
+      setSubmitStatus('error');
+      setStatusMessage('Please provide a valid email address.');
+      return;
+    }
+
+    // Format the email body with all form data
+    const emailBody = `Hello Dinesh,
+
+I'm reaching out through your portfolio contact form.
+
+From: ${formData.name}
+Email: ${formData.email}
+Subject: ${formData.subject}
+
+Message:
+${formData.message}
+
+---
+This message was sent from your portfolio contact form.`;
+
+    // Create mailto link with encoded parameters
+    const recipientEmail = 'dinesh.kachhot@gmail.com';
+    const subject = encodeURIComponent(formData.subject);
+    const body = encodeURIComponent(emailBody);
+    
+    const mailtoLink = `mailto:${recipientEmail}?subject=${subject}&body=${body}`;
+    
+    // Open email client
+    window.location.href = mailtoLink;
+    
+    // Show success message and clear form
+    setSubmitStatus('success');
+    setStatusMessage('Your email client should open. Please send the email from there.');
+    setFormData({ name: '', email: '', subject: '', message: '' });
   };
 
   return (
@@ -215,24 +231,10 @@ const Contact: React.FC = () => {
 
               <button
                 type="submit"
-                disabled={isSubmitting}
-                className={`w-full py-4 px-6 rounded-lg font-semibold transition-all duration-200 flex items-center justify-center space-x-2 ${
-                  isSubmitting
-                    ? 'bg-gray-400 cursor-not-allowed'
-                    : 'bg-gradient-to-r from-blue-600 to-purple-600 hover:shadow-lg transform hover:scale-105'
-                }`}
+                className="w-full py-4 px-6 rounded-lg font-semibold transition-all duration-200 flex items-center justify-center space-x-2 bg-gradient-to-r from-blue-600 to-purple-600 hover:shadow-lg transform hover:scale-105 text-white"
               >
-                {isSubmitting ? (
-                  <>
-                    <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white"></div>
-                    <span>Sending...</span>
-                  </>
-                ) : (
-                  <>
-                    <Send className="w-5 h-5" />
-                    <span>Send Message</span>
-                  </>
-                )}
+                <Send className="w-5 h-5" />
+                <span>Send Message</span>
               </button>
             </form>
           </div>
