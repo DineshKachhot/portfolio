@@ -135,7 +135,7 @@ const Blogs: React.FC<BlogsProps> = ({ onBlogSelect, onBlogAdmin }) => {
           </p>
           
           {/* Admin Access Button */}
-          <div className="mt-8">
+          {/* <div className="mt-8">
             <button
               onClick={onBlogAdmin}
               className="bg-gradient-to-r from-purple-600 to-pink-600 text-white px-6 py-3 rounded-lg font-semibold hover:shadow-lg transform hover:scale-105 transition-all duration-200 flex items-center space-x-2 mx-auto"
@@ -143,13 +143,13 @@ const Blogs: React.FC<BlogsProps> = ({ onBlogSelect, onBlogAdmin }) => {
               <span>✏️</span>
               <span>Manage Blogs</span>
             </button>
-          </div>
+          </div> */}
         </div>
 
         {/* Search and Filter Section */}
         <div className="mb-12 space-y-6">
           {/* Search Bar */}
-          <div className="relative max-w-md mx-auto">
+          {/* <div className="relative max-w-md mx-auto">
             <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
             <input
               type="text"
@@ -158,7 +158,7 @@ const Blogs: React.FC<BlogsProps> = ({ onBlogSelect, onBlogAdmin }) => {
               onChange={(e) => handleSearch(e.target.value)}
               className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent"
             />
-          </div>
+          </div> */}
 
           {/* Tag Filter */}
           <div className="flex flex-wrap justify-center gap-2">

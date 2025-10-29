@@ -7,6 +7,18 @@ const Projects: React.FC = () => {
   const projects = [
     {
       id: 1,
+      title: "Voice Note AI Assistant",
+      description: "A voice note app with local device LLM integration for intelligent note management. Ask questions across all notes or generate summaries using on-device AI processing with complete local storage privacy.",
+      image: "https://images.pexels.com/photos/3862130/pexels-photo-3862130.jpeg?auto=compress&cs=tinysrgb&w=600",
+      tech: ["React Native", "Expo", "Local LLM", "AsyncStorage", "Web"],
+      category: "react-native",
+      links: {
+        demo: "#",
+        github: "#"
+      }
+    },
+    {
+      id: 2,
       title: "FinTech Mobile App",
       description: "A comprehensive financial management app built with React Native, featuring real-time transactions, budget tracking, and investment portfolio management.",
       image: "https://images.pexels.com/photos/590041/pexels-photo-590041.jpeg?auto=compress&cs=tinysrgb&w=600",
@@ -18,7 +30,7 @@ const Projects: React.FC = () => {
       }
     },
     {
-      id: 2,
+      id: 3,
       title: "E-Commerce Flutter App",
       description: "Cross-platform e-commerce application with advanced search, AR product visualization, and seamless checkout experience.",
       image: "https://images.pexels.com/photos/230544/pexels-photo-230544.jpeg?auto=compress&cs=tinysrgb&w=600",
@@ -30,7 +42,7 @@ const Projects: React.FC = () => {
       }
     },
     {
-      id: 3,
+      id: 4,
       title: "Health & Fitness iOS App",
       description: "Native iOS application for health tracking with HealthKit integration, workout plans, and social features built with SwiftUI.",
       image: "https://images.pexels.com/photos/1954524/pexels-photo-1954524.jpeg?auto=compress&cs=tinysrgb&w=600",
@@ -42,7 +54,7 @@ const Projects: React.FC = () => {
       }
     },
     {
-      id: 4,
+      id: 5,
       title: "Social Media Platform",
       description: "Full-stack social media platform with real-time messaging, content sharing, and advanced privacy controls.",
       image: "https://images.pexels.com/photos/267389/pexels-photo-267389.jpeg?auto=compress&cs=tinysrgb&w=600",
@@ -54,7 +66,7 @@ const Projects: React.FC = () => {
       }
     },
     {
-      id: 5,
+      id: 6,
       title: "Travel Planning App",
       description: "Comprehensive travel planning application with offline maps, itinerary management, and expense tracking built with Flutter.",
       image: "https://images.pexels.com/photos/346885/pexels-photo-346885.jpeg?auto=compress&cs=tinysrgb&w=600",
@@ -66,7 +78,7 @@ const Projects: React.FC = () => {
       }
     },
     {
-      id: 6,
+      id: 7,
       title: "Enterprise Dashboard",
       description: "Enterprise-grade dashboard application for data analytics and reporting with advanced visualization capabilities.",
       image: "https://images.pexels.com/photos/590022/pexels-photo-590022.jpeg?auto=compress&cs=tinysrgb&w=600",
