@@ -30,8 +30,10 @@ jobs:
       
     - name: Build
       working-directory: ./
+      env:
+        VITE_BASE_PATH: /portfolio/
       run: npm run build
-        
+      
     - name: Setup Pages
       uses: actions/configure-pages@v4
       if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master'
