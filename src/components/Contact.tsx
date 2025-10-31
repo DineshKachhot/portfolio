@@ -42,28 +42,32 @@ const Contact: React.FC = () => {
     setSubmitStatus('idle');
     setIsSubmitting(true);
 
-    // Get API endpoint from environment variable or use default Vercel URL
-    // Replace 'your-project-name' with your actual Vercel project name
-    const apiUrl = import.meta.env.VITE_EMAIL_API_URL || 'https://portfolio-weld-iota-ylp166i4m8.vercel.app/api/send-email';
-
     try {
-      const response = await fetch(apiUrl, {
+      const response = await fetch('https://api.web3forms.com/submit', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          'Accept': 'application/json'
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({
+          access_key: '80c6747d-8676-4049-ad27-eb4c5683da71',
+          subject: formData.subject,
+          from_name: formData.name,
+          from_email: formData.email,
+          message: formData.message,
+          to_name: 'Dinesh Kachhot'
+        }),
       });
 
       const data = await response.json();
 
-      if (!response.ok) {
+      if (!response.ok || !data.success) {
         throw new Error(data.message || 'Failed to send email');
       }
 
       // Success
       setSubmitStatus('success');
-      setStatusMessage(data.message || 'Thank you for your message! I will get back to you soon.');
+      setStatusMessage('Thank you for your message! I will get back to you soon.');
       setFormData({ name: '', email: '', subject: '', message: '' });
     } catch (error) {
       // Error
