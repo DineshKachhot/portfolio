@@ -13,17 +13,22 @@ export default async function handler(
     'http://localhost:3000'
   ];
 
-  const origin = req.headers.origin;
+  const origin = req.headers.origin as string | undefined;
+  
+  // Set CORS headers
   if (origin && allowedOrigins.includes(origin)) {
     res.setHeader('Access-Control-Allow-Origin', origin);
-  } else {
-    // Allow requests from any origin in development (remove in production if needed)
-    res.setHeader('Access-Control-Allow-Origin', '*');
+  } else if (origin) {
+    // For any other origin, you can either reject or allow
+    // For now, allowing all origins for flexibility
+    res.setHeader('Access-Control-Allow-Origin', origin);
   }
+  
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+  res.setHeader('Access-Control-Max-Age', '86400'); // 24 hours
 
-  // Handle preflight requests
+  // Handle preflight requests - must return early
   if (req.method === 'OPTIONS') {
     return res.status(200).end();
   }
