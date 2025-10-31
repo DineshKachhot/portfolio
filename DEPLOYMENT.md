@@ -86,19 +86,106 @@ The development server will start at `http://localhost:5173`
 
 ## Contact Form
 
-The contact form uses **mailto:** links, which means:
-- No backend server required
-- No email service configuration needed
-- Clicking "Send Message" opens the user's default email client
-- All form data is pre-filled in the email
+The contact form uses a **Vercel serverless function** with **Nodemailer** to send emails via Gmail SMTP. This allows emails to be sent directly without requiring the user to have an email client configured.
 
-This works in all modern browsers and doesn't require any special setup.
+### Email Setup Instructions
+
+#### 1. Gmail App Password Setup
+
+Since Gmail requires an App Password (not your regular password) for SMTP authentication:
+
+1. **Enable 2-Step Verification** on your Google account:
+   - Go to [Google Account Settings](https://myaccount.google.com/)
+   - Navigate to Security → 2-Step Verification
+   - Follow the prompts to enable 2-Step Verification
+
+2. **Generate an App Password**:
+   - Still in Security settings, find "App passwords" (may be under 2-Step Verification)
+   - Click "App passwords" and select "Mail" and "Other (Custom name)"
+   - Enter a name like "Portfolio Contact Form"
+   - Click "Generate"
+   - Copy the 16-character password (remove spaces: `xxxx xxxx xxxx xxxx` becomes `xxxxxxxxxxxxxxxx`)
+
+#### 2. Vercel Environment Variables
+
+1. **Deploy to Vercel** (if not already done):
+   - Either use Vercel CLI or the web UI
+   - The `api/send-email.ts` function will automatically be deployed as a serverless function
+
+2. **Set Environment Variables** in Vercel Dashboard:
+   - Go to your Vercel project → Settings → Environment Variables
+   - Add the following variables:
+     - `GMAIL_USER`: Your Gmail address (e.g., `dinesh.kachhot@gmail.com`)
+     - `GMAIL_APP_PASSWORD`: Your 16-character Gmail App Password (from step 1)
+   - Make sure to add these for **Production**, **Preview**, and **Development** environments
+   - Click "Save"
+
+3. **Redeploy** after setting environment variables:
+   - Go to Deployments tab
+   - Click the three dots on the latest deployment → "Redeploy"
+
+#### 3. Configure Frontend API URL
+
+Update the frontend to point to your Vercel serverless function:
+
+1. **Option A: Using Environment Variable** (Recommended):
+   - Add to your build environment or `.env` file:
+     ```
+     VITE_EMAIL_API_URL=https://your-project-name.vercel.app/api/send-email
+     ```
+   - Replace `your-project-name` with your actual Vercel project name
+
+2. **Option B: Hardcode in Contact Component**:
+   - Edit `src/components/Contact.tsx`
+   - Update line 47 to replace `'https://your-project-name.vercel.app/api/send-email'` with your actual Vercel URL
+
+#### 4. CORS Configuration
+
+The serverless function is configured to accept requests from:
+- `https://dineshkachhot.github.io` (GitHub Pages)
+- `https://kdpro.info` (Custom domain)
+- `http://localhost:5173` and `http://localhost:3000` (Local development)
+
+If you're using a different domain, update the `allowedOrigins` array in `api/send-email.ts`.
+
+### Testing the Contact Form
+
+1. **Test locally** (requires Vercel CLI):
+   ```bash
+   vercel dev
+   ```
+   This will run the serverless function locally on `http://localhost:3000`
+
+2. **Test in production**:
+   - Submit the contact form from your deployed site
+   - Check your Gmail inbox for the email
+   - Verify the sender's email is in the "Reply-To" field for easy responses
+
+### Troubleshooting Email Issues
+
+- **"Email service is not properly configured"**:
+  - Verify environment variables are set in Vercel dashboard
+  - Ensure you've redeployed after adding environment variables
+
+- **"Failed to send email"**:
+  - Check Vercel function logs (Vercel Dashboard → Functions → View Logs)
+  - Verify Gmail App Password is correct (no spaces, 16 characters)
+  - Ensure 2-Step Verification is enabled on your Google account
+
+- **CORS errors**:
+  - Verify your domain is in the `allowedOrigins` array in `api/send-email.ts`
+  - Check browser console for specific CORS error messages
+
+- **Function timeout**:
+  - Check Vercel function logs for errors
+  - Verify SMTP settings are correct (smtp.gmail.com, port 587)
 
 ## Important Notes
 
 1. **Repository Name**: If deploying to GitHub Pages, update the `base` path in `vite.config.ts` to match your repository name
-2. **No Backend Required**: This is a fully static site with no server-side dependencies
-3. **Contact Form**: Uses mailto: links - no email service setup required
+2. **Email Service**: Contact form requires Vercel serverless function deployment with Gmail SMTP credentials
+3. **Environment Variables**: Never commit Gmail credentials to the repository - always use Vercel environment variables
+4. **Separate Deployments**: Frontend can be on GitHub Pages while the email API runs on Vercel
 
 ## Troubleshooting
 

@@ -10,6 +10,7 @@ const Contact: React.FC = () => {
   });
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
   const [statusMessage, setStatusMessage] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -19,7 +20,7 @@ const Contact: React.FC = () => {
     }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
     // Validate required fields
@@ -37,35 +38,44 @@ const Contact: React.FC = () => {
       return;
     }
 
-    // Format the email body with all form data
-    const emailBody = `Hello Dinesh,
+    // Reset status and set loading state
+    setSubmitStatus('idle');
+    setIsSubmitting(true);
 
-I'm reaching out through your portfolio contact form.
+    // Get API endpoint from environment variable or use default Vercel URL
+    // Replace 'your-project-name' with your actual Vercel project name
+    const apiUrl = import.meta.env.VITE_EMAIL_API_URL || 'https://portfolio-dineshkachhots-projects.vercel.app/api/send-email';
 
-From: ${formData.name}
-Email: ${formData.email}
-Subject: ${formData.subject}
+    try {
+      const response = await fetch(apiUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
 
-Message:
-${formData.message}
+      const data = await response.json();
 
----
-This message was sent from your portfolio contact form.`;
+      if (!response.ok) {
+        throw new Error(data.message || 'Failed to send email');
+      }
 
-    // Create mailto link with encoded parameters
-    const recipientEmail = 'dinesh.kachhot@gmail.com';
-    const subject = encodeURIComponent(formData.subject);
-    const body = encodeURIComponent(emailBody);
-    
-    const mailtoLink = `mailto:${recipientEmail}?subject=${subject}&body=${body}`;
-    
-    // Open email client
-    window.location.href = mailtoLink;
-    
-    // Show success message and clear form
-    setSubmitStatus('success');
-    setStatusMessage('Your email client should open. Please send the email from there.');
-    setFormData({ name: '', email: '', subject: '', message: '' });
+      // Success
+      setSubmitStatus('success');
+      setStatusMessage(data.message || 'Thank you for your message! I will get back to you soon.');
+      setFormData({ name: '', email: '', subject: '', message: '' });
+    } catch (error) {
+      // Error
+      setSubmitStatus('error');
+      setStatusMessage(
+        error instanceof Error 
+          ? error.message 
+          : 'An error occurred while sending your message. Please try again later.'
+      );
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -231,10 +241,11 @@ This message was sent from your portfolio contact form.`;
 
               <button
                 type="submit"
-                className="w-full py-4 px-6 rounded-lg font-semibold transition-all duration-200 flex items-center justify-center space-x-2 bg-gradient-to-r from-blue-600 to-purple-600 hover:shadow-lg transform hover:scale-105 text-white"
+                disabled={isSubmitting}
+                className="w-full py-4 px-6 rounded-lg font-semibold transition-all duration-200 flex items-center justify-center space-x-2 bg-gradient-to-r from-blue-600 to-purple-600 hover:shadow-lg transform hover:scale-105 text-white disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
               >
                 <Send className="w-5 h-5" />
-                <span>Send Message</span>
+                <span>{isSubmitting ? 'Sending...' : 'Send Message'}</span>
               </button>
             </form>
           </div>
