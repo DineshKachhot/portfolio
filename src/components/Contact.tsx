@@ -44,7 +44,7 @@ const Contact: React.FC = () => {
 
     // Get API endpoint from environment variable or use default Vercel URL
     // Replace 'your-project-name' with your actual Vercel project name
-    const apiUrl = import.meta.env.VITE_EMAIL_API_URL || 'https://portfolio-dineshkachhots-projects.vercel.app/api/send-email';
+    const apiUrl = import.meta.env.VITE_EMAIL_API_URL || 'https://portfolio-weld-iota-ylp166i4m8.vercel.app/api/send-email';
 
     try {
       const response = await fetch(apiUrl, {
