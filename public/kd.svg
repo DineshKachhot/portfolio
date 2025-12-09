@@ -23,7 +23,7 @@
   </defs>
 
   <!-- The main circle shape with the new gradient and shadow applied -->
-  <circle cx="100" cy="100" r="100" fill="url(#gradient)" filter="url(#shadow)"/>
+  <circle cx="100" cy="100" r="100" fill="url(#gradient)"/>
 
   <!-- The initials "KD" (text-4xl font-bold text-white) -->
   <text x="100" y="110"

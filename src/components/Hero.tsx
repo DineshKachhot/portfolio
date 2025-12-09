@@ -2,6 +2,45 @@ import React from 'react';
 import { ChevronDown, Download, Github, Instagram, Linkedin, Mail, Twitter } from 'lucide-react';
 
 const Hero: React.FC = () => {
+  const [text, setText] = React.useState('');
+  const [isDeleting, setIsDeleting] = React.useState(false);
+  const [loopNum, setLoopNum] = React.useState(0);
+  const [typingSpeed, setTypingSpeed] = React.useState(150);
+
+  const roles = ["Mobile Architect", "Future Entrepreneur", "Footballer", "Tennis Player", "Traveller", "Father", "Husband"];
+
+  React.useEffect(() => {
+    const handleTyping = () => {
+      const i = loopNum % roles.length;
+      const fullText = roles[i];
+
+      setText(current => {
+        if (isDeleting) {
+          return fullText.substring(0, current.length - 1);
+        } else {
+          return fullText.substring(0, current.length + 1);
+        }
+      });
+
+      setTypingSpeed(() => {
+        if (isDeleting) return 50;
+        return 150;
+      });
+
+      if (!isDeleting && text === fullText) {
+        setIsDeleting(true);
+        setTypingSpeed(2000);
+      } else if (isDeleting && text === '') {
+        setIsDeleting(false);
+        setLoopNum(l => l + 1);
+        setTypingSpeed(500);
+      }
+    };
+
+    const timer = setTimeout(handleTyping, typingSpeed);
+    return () => clearTimeout(timer);
+  }, [text, isDeleting, loopNum, typingSpeed, roles]);
+
   const scrollToAbout = () => {
     document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' });
   };
@@ -22,8 +61,9 @@ const Hero: React.FC = () => {
             </span>
           </h1>
 
-          <h2 className="text-2xl md:text-3xl font-semibold text-gray-700 mb-6">
-            Mobile Architect
+          <h2 className="text-2xl md:text-3xl font-semibold text-gray-700 mb-6 min-h-[40px]">
+            <span>{text}</span>
+            <span className="animate-pulse text-blue-600">|</span>
           </h2>
 
           <p className="text-xl md:text-2xl text-gray-600 mb-8 max-w-3xl mx-auto leading-relaxed">
@@ -36,14 +76,14 @@ const Hero: React.FC = () => {
               <Download size={20} />
               <span>Download CV</span>
             </button>
-            
-            <button 
+
+            <button
               onClick={() => document.getElementById('blogs')?.scrollIntoView({ behavior: 'smooth' })}
               className="bg-white text-gray-700 border-2 border-gray-300 px-8 py-4 rounded-full font-semibold hover:shadow-lg hover:border-blue-600 hover:text-blue-600 transform hover:scale-105 transition-all duration-200"
             >
               Read My Blogs
             </button>
-            
+
             <div className="flex space-x-4">
               <a href="#" onClick={() => window.open('https://github.com/dineshkachhot', '_blank')} className="w-12 h-12 bg-white rounded-full shadow-md flex items-center justify-center hover:shadow-lg hover:scale-110 transition-all duration-200">
                 <Github size={24} className="text-gray-700" />

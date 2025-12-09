@@ -18,7 +18,7 @@ function App() {
 
   useEffect(() => {
     if (currentView !== 'portfolio') return;
-    
+
     const handleScroll = () => {
       const sections = ['home', 'about', 'skills', 'experience', 'projects', 'blogs', 'contact'];
       const scrollPosition = window.scrollY + 100;

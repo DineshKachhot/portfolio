@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ExternalLink, Github, Smartphone, Globe, Filter } from 'lucide-react';
+import { ExternalLink, Github, Smartphone, Globe } from 'lucide-react';
 
 const Projects: React.FC = () => {
   const [activeFilter, setActiveFilter] = useState('all');
@@ -7,46 +7,82 @@ const Projects: React.FC = () => {
   const projects = [
     {
       id: 1,
-      title: "Voice Note AI Assistant",
-      description: "A voice note app with local device LLM integration for intelligent note management. Ask questions across all notes or generate summaries using on-device AI processing with complete local storage privacy.",
-      image: "https://images.pexels.com/photos/3862130/pexels-photo-3862130.jpeg?auto=compress&cs=tinysrgb&w=600",
-      tech: ["React Native", "Expo", "Local LLM", "AsyncStorage", "Web"],
+      title: "RealAiHeadshot",
+      description: "Transform your casual selfies into high-end, studio-quality profile photos for LinkedIn, CVs, and business portfolios. Instant, affordable, and AI-powered.",
+      image: "https://images.pexels.com/photos/8090137/pexels-photo-8090137.jpeg?auto=compress&cs=tinysrgb&w=600",
+      tech: ["React", "React Native", "Gemini 3", "Supabase", "Polar"],
       category: "react-native",
       links: {
-        demo: "#",
+        demo: "https://www.realaiheadshot.com",
         github: "#"
       }
     },
     {
       id: 2,
-      title: "FinTech Mobile App",
-      description: "A comprehensive financial management app built with React Native, featuring real-time transactions, budget tracking, and investment portfolio management.",
-      image: "https://images.pexels.com/photos/590041/pexels-photo-590041.jpeg?auto=compress&cs=tinysrgb&w=600",
-      tech: ["React Native", "TypeScript", "Firebase", "Stripe API"],
+      title: "Prishine",
+      description: "E-commerce website for imitation jewellery business featuring a modern shopping experience.",
+      image: "https://images.pexels.com/photos/265906/pexels-photo-265906.jpeg?auto=compress&cs=tinysrgb&w=600",
+      tech: ["React", "React Native", "Turborepo", "Firebase", "Razorpay"],
       category: "react-native",
       links: {
-        demo: "#",
+        demo: "http://prishine.in",
         github: "#"
       }
     },
     {
       id: 3,
-      title: "E-Commerce Flutter App",
-      description: "Cross-platform e-commerce application with advanced search, AR product visualization, and seamless checkout experience.",
-      image: "https://images.pexels.com/photos/230544/pexels-photo-230544.jpeg?auto=compress&cs=tinysrgb&w=600",
-      tech: ["Flutter", "Dart", "Supabase", "AR Core"],
-      category: "flutter",
+      title: "Endo App",
+      description: "A tailor-made, evidence-driven companion for those navigating life with endometriosis and/or adenomyosis.",
+      image: "https://images.pexels.com/photos/5726794/pexels-photo-5726794.jpeg?auto=compress&cs=tinysrgb&w=600",
+      tech: ["Mobile Development", "Health Tech"],
+      category: "mobile",
       links: {
-        demo: "#",
+        demo: "https://endometriose.app/en/endo-app/",
         github: "#"
       }
     },
     {
       id: 4,
-      title: "Health & Fitness iOS App",
-      description: "Native iOS application for health tracking with HealthKit integration, workout plans, and social features built with SwiftUI.",
-      image: "https://images.pexels.com/photos/1954524/pexels-photo-1954524.jpeg?auto=compress&cs=tinysrgb&w=600",
-      tech: ["Swift", "SwiftUI", "HealthKit", "Core Data"],
+      title: "PayFlex",
+      description: "Buy Now Pay Later platform allowing customers to pay in interest-free installments.",
+      image: "https://images.pexels.com/photos/1602726/pexels-photo-1602726.jpeg?auto=compress&cs=tinysrgb&w=600",
+      tech: ["Flutter", "Dart", "FinTech"],
+      category: "flutter",
+      links: {
+        demo: "https://payflex.co.za/",
+        github: "#"
+      }
+    },
+    {
+      id: 5,
+      title: "Social Pilot",
+      description: "Comprehensive social media management and marketing tool for businesses and agencies.",
+      image: "https://images.pexels.com/photos/267389/pexels-photo-267389.jpeg?auto=compress&cs=tinysrgb&w=600",
+      tech: ["Swift", "iOS", "Social Media API"],
+      category: "ios",
+      links: {
+        demo: "https://www.socialpilot.co/",
+        github: "#"
+      }
+    },
+    {
+      id: 6,
+      title: "Telkom Pay mPOS",
+      description: "Mobile Point of Sale solution enabling merchants to accept payments directly on their phones.",
+      image: "https://images.pexels.com/photos/4482900/pexels-photo-4482900.jpeg?auto=compress&cs=tinysrgb&w=600",
+      tech: ["React Native", "Context API", "Eclips API"],
+      category: "react-native",
+      links: {
+        demo: "https://api.ukheshe.co.za/telkom-static/index.html",
+        github: "#"
+      }
+    },
+    {
+      id: 7,
+      title: "PatientEngage",
+      description: "Hospital management app to reduce paperwork, schedule exercises, and track spine surgery patients.",
+      image: "https://images.pexels.com/photos/4021775/pexels-photo-4021775.jpeg?auto=compress&cs=tinysrgb&w=600",
+      tech: ["Swift", "iOS", "Healthcare"],
       category: "ios",
       links: {
         demo: "#",
@@ -54,11 +90,23 @@ const Projects: React.FC = () => {
       }
     },
     {
-      id: 5,
-      title: "Social Media Platform",
-      description: "Full-stack social media platform with real-time messaging, content sharing, and advanced privacy controls.",
-      image: "https://images.pexels.com/photos/267389/pexels-photo-267389.jpeg?auto=compress&cs=tinysrgb&w=600",
-      tech: ["React Native", "Node.js", "Socket.io", "MongoDB"],
+      id: 8,
+      title: "MuseMatch",
+      description: "A dynamic buy and sell platform connecting buyers and sellers seamlessly.",
+      image: "https://images.pexels.com/photos/5632402/pexels-photo-5632402.jpeg?auto=compress&cs=tinysrgb&w=600",
+      tech: ["FlutterFlow", "Flutter", "Firebase", "Stripe"],
+      category: "flutter",
+      links: {
+        demo: "#",
+        github: "#"
+      }
+    },
+    {
+      id: 9,
+      title: "Ruggy",
+      description: "Order management application for rug cleaning companies with AI-powered form filling.",
+      image: "https://images.pexels.com/photos/4577379/pexels-photo-4577379.jpeg?auto=compress&cs=tinysrgb&w=600",
+      tech: ["React Native", "Expo", "Firebase", "OpenAI"],
       category: "react-native",
       links: {
         demo: "#",
@@ -66,24 +114,12 @@ const Projects: React.FC = () => {
       }
     },
     {
-      id: 6,
-      title: "Travel Planning App",
-      description: "Comprehensive travel planning application with offline maps, itinerary management, and expense tracking built with Flutter.",
-      image: "https://images.pexels.com/photos/346885/pexels-photo-346885.jpeg?auto=compress&cs=tinysrgb&w=600",
-      tech: ["Flutter", "Google Maps API", "Firebase", "SQLite"],
-      category: "flutter",
-      links: {
-        demo: "#",
-        github: "#"
-      }
-    },
-    {
-      id: 7,
-      title: "Enterprise Dashboard",
-      description: "Enterprise-grade dashboard application for data analytics and reporting with advanced visualization capabilities.",
-      image: "https://images.pexels.com/photos/590022/pexels-photo-590022.jpeg?auto=compress&cs=tinysrgb&w=600",
-      tech: ["Swift", "Core Data", "Charts", "REST API"],
-      category: "ios",
+      id: 10,
+      title: "Running Assistant",
+      description: "Training companion app for runners preparing for long-range competitions.",
+      image: "https://images.unsplash.com/photo-1594882645126-14020914d58d?q=80&w=2085&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      tech: ["React Native", "Health Tracking"],
+      category: "react-native",
       links: {
         demo: "#",
         github: "#"
@@ -98,9 +134,12 @@ const Projects: React.FC = () => {
     { id: 'ios', label: 'iOS', icon: <Smartphone className="w-4 h-4" /> },
   ];
 
-  const filteredProjects = activeFilter === 'all' 
-    ? projects 
-    : projects.filter(project => project.category === activeFilter);
+  const filteredProjects = activeFilter === 'all'
+    ? projects
+    : projects.filter(project => {
+      if (activeFilter === 'mobile') return true; // Show all for generic mobile if needed, but we use specific cats
+      return project.category === activeFilter;
+    });
 
   return (
     <section id="projects" className="py-20 bg-gray-50">
@@ -121,11 +160,10 @@ const Projects: React.FC = () => {
             <button
               key={filter.id}
               onClick={() => setActiveFilter(filter.id)}
-              className={`flex items-center space-x-2 px-6 py-3 rounded-full font-medium transition-all duration-200 ${
-                activeFilter === filter.id
-                  ? 'bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-lg'
-                  : 'bg-white text-gray-700 hover:bg-gray-100 shadow-md hover:shadow-lg'
-              }`}
+              className={`flex items-center space-x-2 px-6 py-3 rounded-full font-medium transition-all duration-200 ${activeFilter === filter.id
+                ? 'bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-lg'
+                : 'bg-white text-gray-700 hover:bg-gray-100 shadow-md hover:shadow-lg'
+                }`}
             >
               {filter.icon}
               <span>{filter.label}</span>
